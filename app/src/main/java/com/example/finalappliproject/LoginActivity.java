@@ -22,7 +22,6 @@ public class LoginActivity extends AppCompatActivity {
     float v = 0;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -21,13 +21,24 @@ public class SignUpTabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.signup_fragment,container,false);
+        findViews(root);
+        animation(root);
 
-        email = root.findViewById(R.id.email);
-        phoneNum = root.findViewById(R.id.phoneNumber);
-        password = root.findViewById(R.id.password);
-        confirmPassword = root.findViewById(R.id.confirmPassword);
-        signUp = root.findViewById(R.id.signUp);
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email,password,phoneNum;
 
+            }
+        });
+
+
+
+        return root;
+    }
+
+
+    private void animation(ViewGroup root) {
         email.setTranslationY(300);
         phoneNum.setTranslationY(300);
         password.setTranslationY(300);
@@ -46,8 +57,15 @@ public class SignUpTabFragment extends Fragment {
         password.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(600).start();
         confirmPassword.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(600).start();
         signUp.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(800).start();
-
-        return root;
     }
+
+    private void findViews(ViewGroup root) {
+        email = root.findViewById(R.id.email);
+        phoneNum = root.findViewById(R.id.phoneNumber);
+        password = root.findViewById(R.id.password);
+        confirmPassword = root.findViewById(R.id.confirmPassword);
+        signUp = root.findViewById(R.id.signUp);
+    }
+
 
 }

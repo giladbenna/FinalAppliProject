@@ -1,15 +1,26 @@
 package com.example.finalappliproject;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginTabFragment extends Fragment {
 
@@ -17,6 +28,9 @@ public class LoginTabFragment extends Fragment {
     TextView passwordTV;
     TextView forgotPasswordTV;
     Button login;
+    FirebaseAuth mAuth;
+
+    ProgressBar progressBar;
     float v = 0;
 
 
@@ -25,31 +39,41 @@ public class LoginTabFragment extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.login_tab_fragment,container,false);
         findViews(root);
         animation(root);
+        mAuth = FirebaseAuth.getInstance();
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email,password;
-                email = String.valueOf(emailTV.getText());
-                password = String.valueOf(passwordTV.getText());
+        login.setOnClickListener(v -> {
+            String email,password;
+            progressBar.setVisibility(View.VISIBLE);
+            email = String.valueOf(emailTV.getText());
+            password = String.valueOf(passwordTV.getText());
 
-                if(TextUtils.isEmpty(email)){
-                    MessageOnNoEmail();
-                }
-                if(TextUtils.isEmpty(password)){
-                    MessageOnNoPassword();
-                }
+            if(TextUtils.isEmpty(email)){
+                MessageOnNoSomething("email");
+                return;
             }
+            if(TextUtils.isEmpty(password)){
+                MessageOnNoSomething("password");
+                return;
+            }
+
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+//                                    Log.d(TAG, "createUserWithEmail:success");
+//                                    FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(LoginTabFragment.this.getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
 
 
         return root;
     }
-    private void MessageOnNoEmail(){
-        Toast.makeText(getContext(),"Please Put a Email",Toast.LENGTH_SHORT).show();
-    }
-    private void MessageOnNoPassword(){
-        Toast.makeText(getContext(),"Please Put A Password",Toast.LENGTH_SHORT).show();
+    private void MessageOnNoSomething(String something){
+        Toast.makeText(getContext(),"Please Put a "+ something,Toast.LENGTH_SHORT).show();
     }
 
     private void animation(ViewGroup root) {
@@ -75,6 +99,7 @@ public class LoginTabFragment extends Fragment {
         passwordTV = root.findViewById(R.id.password);
         forgotPasswordTV = root.findViewById(R.id.forgotPassword);
         login = root.findViewById(R.id.loginButton);
+        progressBar = root.findViewById(R.id.progressBar);
     }
 
 

@@ -1,21 +1,37 @@
 package com.example.finalappliproject;
 
+import static android.content.ContentValues.TAG;
+
+import android.app.MediaRouteButton;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpTabFragment extends Fragment {
 
-    TextView email;
-    TextView password;
-    TextView phoneNum;
-    TextView confirmPassword;
+    TextView emailTV;
+    TextView passwordTV;
+    TextView phoneNumTV;
+    TextView confirmPasswordTV;
     Button signUp;
+    FirebaseAuth mAuth;
+    ProgressBar progressBar;
+
     float v = 0;
 
     @Override
@@ -24,12 +40,46 @@ public class SignUpTabFragment extends Fragment {
         findViews(root);
         animation(root);
 
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email,password,phoneNum;
+        mAuth = FirebaseAuth.getInstance();
 
+        signUp.setOnClickListener(v -> {
+            String email,password,confirmPassword,phoneNum;
+            progressBar.setVisibility(View.VISIBLE);
+            email = String.valueOf(emailTV.getText());
+            password = String.valueOf(passwordTV.getText());
+            confirmPassword = String.valueOf(confirmPasswordTV.getText());
+            phoneNum = String.valueOf(phoneNumTV.getText());
+
+
+            if(TextUtils.isEmpty(email)){
+                MessageOnNoSomething("email");
+                return;
             }
+            if(TextUtils.isEmpty(password)){
+                MessageOnNoSomething("password");
+                return;
+            }
+            if(TextUtils.isEmpty(phoneNum)){
+                MessageOnNoSomething("phone Number");
+                return;
+            }
+            if(TextUtils.isEmpty(confirmPassword)){
+                MessageOnNoSomething("confirm Password");
+                return;
+            }
+
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        progressBar.setVisibility(View.GONE);
+                        if (task.isSuccessful()) {
+                            Toast.makeText(SignUpTabFragment.this.getContext(), "Account Created.", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(SignUpTabFragment.this.getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
 
 
@@ -37,34 +87,39 @@ public class SignUpTabFragment extends Fragment {
         return root;
     }
 
+    private void MessageOnNoSomething(String something){
+        Toast.makeText(getContext(),"Please Put a "+ something,Toast.LENGTH_SHORT).show();
+    }
+
 
     private void animation(ViewGroup root) {
-        email.setTranslationY(300);
-        phoneNum.setTranslationY(300);
-        password.setTranslationY(300);
-        confirmPassword.setTranslationY(300);
+        emailTV.setTranslationY(300);
+        phoneNumTV.setTranslationY(300);
+        passwordTV.setTranslationY(300);
+        confirmPasswordTV.setTranslationY(300);
         signUp.setTranslationY(300);
 
-        email.setAlpha(v);
-        phoneNum.setAlpha(v);
-        password.setAlpha(v);
-        confirmPassword.setAlpha(v);
+        emailTV.setAlpha(v);
+        phoneNumTV.setAlpha(v);
+        passwordTV.setAlpha(v);
+        confirmPasswordTV.setAlpha(v);
         signUp.setAlpha(v);
 
 
-        email.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(300).start();
-        phoneNum.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(400).start();
-        password.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(600).start();
-        confirmPassword.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(600).start();
+        emailTV.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        phoneNumTV.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(400).start();
+        passwordTV.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(600).start();
+        confirmPasswordTV.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(600).start();
         signUp.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(800).start();
     }
 
     private void findViews(ViewGroup root) {
-        email = root.findViewById(R.id.email);
-        phoneNum = root.findViewById(R.id.phoneNumber);
-        password = root.findViewById(R.id.password);
-        confirmPassword = root.findViewById(R.id.confirmPassword);
+        emailTV = root.findViewById(R.id.email);
+        phoneNumTV = root.findViewById(R.id.phoneNumber);
+        passwordTV = root.findViewById(R.id.password);
+        confirmPasswordTV = root.findViewById(R.id.confirmPassword);
         signUp = root.findViewById(R.id.signUp);
+        progressBar = root.findViewById(R.id.progressBar);
     }
 
 

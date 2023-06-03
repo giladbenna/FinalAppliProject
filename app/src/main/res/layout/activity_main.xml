@@ -9,7 +9,7 @@
     android:gravity="center"
     tools:context=".MainActivity"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start"
+    tools:openDrawer="end"
     >
 
     <com.google.android.material.navigation.NavigationView
@@ -34,25 +34,31 @@
                 android:layout_gravity="top"
                 android:titleTextColor="@android:color/white"
                 app:navigationIcon="@drawable/menu_logo"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
-                <TextView
-                    android:id="@+id/userInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hello"
 
-                    />
-                <Button
-                    android:id="@+id/LogOut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/logout"/>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-        </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            android:gravity="center">-->
+<!--                <TextView-->
+<!--                    android:id="@+id/userInfo"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Hello"-->
+
+<!--                    />-->
+<!--                <Button-->
+<!--                    android:id="@+id/LogOut"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/logout"/>-->
+
+<!--        </LinearLayout>-->
 
     </LinearLayout>
 

@@ -17,11 +17,11 @@
             android:title="@string/profile">
                 <menu>
                     <item
-                        android:id="@+id/my_info"
+                        android:id="@+id/nav_info"
                         android:title="@string/my_info"
                         android:icon="@drawable/profile_logo" />
                     <item
-                        android:id="@+id/logout"
+                        android:id="@+id/nav_logout"
                         android:title="@string/LogOut"
                         android:icon="@drawable/logout_icon" />
                 </menu>

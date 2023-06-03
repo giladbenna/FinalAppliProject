@@ -1,4 +1,4 @@
-package com.example.finalappliproject;
+package com.example.finalappliproject.Fragments;
 
 import static android.content.ContentValues.TAG;
 
@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.finalappliproject.MainActivity;
+import com.example.finalappliproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

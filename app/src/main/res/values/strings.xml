@@ -10,4 +10,14 @@
     <string name="phone_number">phone number</string>
     <string name="confirm_password">confirm password</string>
     <string name="logout">LogOut</string>
+    <string name="home">Home</string>
+    <string name="favorite">favorite</string>
+    <string name="profile">Profile</string>
+    <string name="fresh_food">Fresh Food</string>
+    <string name="my_info">My Info</string>
+    <string name="LogOut">LogOut</string>
+    <string name="share_profile">Share Profile</string>
+    <string name="communicate">Communicate</string>
+    <string name="nav_drawer_open">Open Drawer</string>
+    <string name="nav_drawer_close">Close Drawer</string>
 </resources>

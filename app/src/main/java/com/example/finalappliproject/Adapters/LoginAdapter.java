@@ -1,9 +1,12 @@
-package com.example.finalappliproject;
+package com.example.finalappliproject.Adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.finalappliproject.Fragments.LoginTabFragment;
+import com.example.finalappliproject.Fragments.SignUpTabFragment;
 
 public class LoginAdapter extends FragmentStateAdapter {
 

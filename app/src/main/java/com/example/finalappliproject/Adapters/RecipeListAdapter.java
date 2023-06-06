@@ -1,6 +1,7 @@
 package com.example.finalappliproject.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.finalappliproject.Interfaces.RecipeCallback;
 import com.example.finalappliproject.Models.Recipe;
 import com.example.finalappliproject.R;
 import com.example.finalappliproject.Utilitis.ImageLoader;
@@ -21,6 +23,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.It
 
         private Context context;
         private ArrayList<Recipe> recipeItem;
+        private RecipeCallback recipeCallback;
 
         private RecipeListAdapter.OnClickListener onClickListener;
 
@@ -28,6 +31,9 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.It
             this.context = context;
             this.recipeItem = recipeItem;
         }
+        public void setRecipeCallback(RecipeCallback recipeCallback) {
+            this.recipeCallback = recipeCallback;
+    }
 
         @NonNull
         @Override
@@ -43,7 +49,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.It
             holder.difficulty.setText(recipe.getDifficulty());
             holder.title.setText(recipe.getTitle());
             holder.preparation_time.setText(TimeFormat.getFormattedTime(recipe.getPreparation_time()));
-//            ImageLoader.getInstance().loadImage(recipe.getImage(), holder.recipe_IMG_poster);
+            ImageLoader.getInstance().loadImage(recipe.getImage(), holder.recipe_IMG_poster);
             if (recipe.isFavorite())
                 holder.recipe_IMG_favorite.setImageResource(R.drawable.heart);
             else
@@ -81,6 +87,16 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.It
                 difficulty = itemView.findViewById(R.id.recipe_LBL_difficulty);
                 preparation_time = itemView.findViewById(R.id.recipe_LBL_duration);
                 recipe_IMG_favorite = itemView.findViewById(R.id.recipe_IMG_favorite);
+
+                itemView.setOnClickListener(v -> {
+                    if (recipeCallback != null)
+                        recipeCallback.itemClicked(getItem(getAdapterPosition()), getAdapterPosition());
+                });
+                recipe_IMG_favorite.setOnClickListener(v -> {
+                    Log.d("hi", "ItemViewHolder: hello");
+                    if (recipeCallback != null)
+                        recipeCallback.favoriteClicked(getItem(getAdapterPosition()), getAdapterPosition());
+                });
 
             }
         }

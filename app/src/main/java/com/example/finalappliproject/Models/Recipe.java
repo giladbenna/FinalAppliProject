@@ -8,6 +8,9 @@ public class Recipe {
     private String difficulty = "";
     private int preparation_time = 0;
 
+
+
+
     public Recipe(String title, String image, String difficulty, int preparation_time) {
         this.title = title;
         this.image = image;

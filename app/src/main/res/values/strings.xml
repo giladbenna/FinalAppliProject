@@ -20,4 +20,7 @@
     <string name="communicate">Communicate</string>
     <string name="nav_drawer_open">Open Drawer</string>
     <string name="nav_drawer_close">Close Drawer</string>
+    <string name="userName">User Name</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

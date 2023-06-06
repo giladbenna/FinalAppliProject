@@ -14,12 +14,12 @@ public class LoginActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
-    FloatingActionButton fb,google;
     LoginAdapter adapter;
+    FloatingActionButton fb,google;
+
     private String[] titles =  new String[]{"Login","SignUp"};
 
     float v = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Login"));
         tabLayout.addTab(tabLayout.newTab().setText("Sign Up"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        getSupportActionBar().hide();
         adapter = new LoginAdapter(this);
         viewPager.setAdapter(adapter);
         new TabLayoutMediator(tabLayout,viewPager,((tab, position) -> tab.setText(titles[position]))).attach();

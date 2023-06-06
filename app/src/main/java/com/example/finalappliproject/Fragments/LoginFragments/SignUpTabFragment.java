@@ -1,4 +1,4 @@
-package com.example.finalappliproject.Fragments;
+package com.example.finalappliproject.Fragments.LoginFragments;
 
 import static android.content.ContentValues.TAG;
 
@@ -82,6 +82,7 @@ public class SignUpTabFragment extends Fragment {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             Toast.makeText(SignUpTabFragment.this.getContext(), "Account Created.", Toast.LENGTH_SHORT).show();
+
 
                         } else {
                             // If sign in fails, display a message to the user.

@@ -35,10 +35,11 @@
                 android:titleTextColor="@android:color/white"
                 app:navigationIcon="@drawable/menu_logo"/>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/view_pager"
+            <FrameLayout
+                android:id="@+id/frame_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent">
+            </FrameLayout>
 
 <!--        <LinearLayout-->
 <!--            android:layout_width="match_parent"-->

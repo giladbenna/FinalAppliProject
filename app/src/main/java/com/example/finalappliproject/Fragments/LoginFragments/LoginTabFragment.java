@@ -1,4 +1,4 @@
-package com.example.finalappliproject.Fragments;
+package com.example.finalappliproject.Fragments.LoginFragments;
 
 import static android.content.ContentValues.TAG;
 
@@ -32,7 +32,6 @@ public class LoginTabFragment extends Fragment {
     TextView forgotPasswordTV;
     Button login;
     FirebaseAuth mAuth;
-
     ProgressBar progressBar;
     float v = 0;
 

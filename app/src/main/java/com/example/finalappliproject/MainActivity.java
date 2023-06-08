@@ -17,21 +17,30 @@ import com.example.finalappliproject.Fragments.NavFragments.MainFragment;
 import com.example.finalappliproject.Fragments.NavFragments.UserInfoFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-
     FrameLayout frameLayout;
-
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+        if (user == null) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         /*-----------------Hooks----------------------*/
         findViews();

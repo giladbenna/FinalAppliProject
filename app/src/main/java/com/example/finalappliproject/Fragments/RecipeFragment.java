@@ -1,6 +1,7 @@
 package com.example.finalappliproject.Fragments;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,16 @@ public class RecipeFragment extends Fragment {
             public void itemClicked(Recipe recipe, int position) {
                 // here i can change things per click on each item in the recycle
                 Toast.makeText(getContext(), "" + recipe.getTitle(), Toast.LENGTH_SHORT).show();
+                // Create a new instance of the destination fragment
+                RecipeDetailsFragment fragment = new RecipeDetailsFragment();
+
+                // Create a bundle and add the recipe object as an argument
+                Bundle args = new Bundle();
+                args.putParcelable("selectedRecipe", recipe);
+                fragment.setArguments(args);
+
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragment).commit();
+
 
 
             }

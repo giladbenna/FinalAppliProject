@@ -33,13 +33,13 @@ public class RecipeFragment extends Fragment {
     }
 
     private void initViews() {
-        RecipeListAdapter movieAdapter = new RecipeListAdapter(getContext(), DataManager.getRecipes());
+        RecipeListAdapter recipeListAdapter = new RecipeListAdapter(getContext(), DataManager.getRecipes());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         main_LST_recipes.setLayoutManager(linearLayoutManager);
-        main_LST_recipes.setAdapter(movieAdapter);
+        main_LST_recipes.setAdapter(recipeListAdapter);
 
-        movieAdapter.setRecipeCallback(new RecipeCallback() {
+        recipeListAdapter.setRecipeCallback(new RecipeCallback() {
             @Override
             public void favoriteClicked(Recipe recipe, int position) {
                 recipe.setFavorite((!recipe.isFavorite()));

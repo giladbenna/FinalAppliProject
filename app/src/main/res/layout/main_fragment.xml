@@ -3,26 +3,209 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:background="@drawable/background3"
+        >
+
+        <ImageView
+            android:id="@+id/logo_nav"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:src="@drawable/food_logo_nav"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logo_nav"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/akaya_telivigala"
+            android:gravity="center"
+            android:text="@string/fresh_food"
+            android:textColor="#333333"
+            android:textSize="32sp"
+            android:textStyle="bold">
+
+        </TextView>
+
+
+    </RelativeLayout>
+
+
+
+    <Button
+        android:id="@+id/favoriteButton"
+        android:layout_width="195dp"
+        android:layout_height="80dp"
+        android:text="@string/favorites"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/akaya_telivigala"
+        android:backgroundTint="@color/light_blue"
+        android:layout_marginTop="210dp"
+        android:layout_marginStart="10dp"
+        android:paddingTop="22dp"/>
+
+    <Button
+        android:id="@+id/RandomButton"
+        android:layout_width="195dp"
+        android:layout_height="80dp"
+        android:text="Random"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/akaya_telivigala"
+        android:backgroundTint="@color/light_blue"
+        android:layout_marginTop="210dp"
+        android:layout_marginEnd="10dp"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="22dp"
+        />
+
+
+
+    <LinearLayout
+        android:id="@+id/RadioButtons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="MainFragment"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:background="@color/blue">
+        android:layout_below="@id/RandomButton"
+        android:layout_above="@id/recipeButton"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
 
-    </TextView>
+        <LinearLayout
+            android:id="@+id/leftCheckboxesLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            >
+
+            <CheckBox
+                android:id="@+id/checkbox1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pasta"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="8dp"
+                />
+
+            <CheckBox
+                android:id="@+id/checkbox2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Peperoni"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="8dp"/>
+
+            <CheckBox
+                android:id="@+id/checkbox3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tomato"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="8dp"/>
+
+            <CheckBox
+                android:id="@+id/checkbox4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="garlic"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="8dp"/>
+
+            <CheckBox
+                android:id="@+id/checkbox5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="mozarella"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rightCheckboxesLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/checkbox6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Flower"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="8dp"/>
+
+            <CheckBox
+                android:id="@+id/checkbox7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Meat"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="8dp"/>
+
+            <CheckBox
+                android:id="@+id/checkbox8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chocolate"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="8dp"/>
+
+            <CheckBox
+                android:id="@+id/checkbox9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cheese"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="8dp"/>
+
+            <CheckBox
+                android:id="@+id/checkbox10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mushrooms"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="8dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 
     <Button
         android:id="@+id/recipeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find Me Recipe"
-        android:textSize="16sp"
+        android:text="@string/find_me_recipe"
+        android:textSize="24sp"
         android:textStyle="bold"
+        android:fontFamily="@font/akaya_telivigala"
         android:backgroundTint="@color/light_blue"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="600dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:paddingTop = "20dp"
         />
 
 

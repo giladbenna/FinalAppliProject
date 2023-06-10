@@ -3,14 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/RecipeDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello"
-        android:textSize="22sp"
-        android:layout_marginTop="100dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    </TextView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+<!--            <com.google.android.material.imageview.ShapeableImageView-->
+<!--                android:id="@+id/recipe_IMG_Image"-->
+<!--                android:layout_width="170dp"-->
+<!--                android:layout_height="120dp"-->
+<!--                android:layout_alignParentStart="true"-->
+<!--                android:layout_alignParentTop="true"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:src="@drawable/ic_launcher_background" />-->
+
+
+
+
+            <TextView
+                android:id="@+id/RecipeDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:text="@string/tomato_soup_details"
+                android:textSize="22sp">
+
+            </TextView>
+        </RelativeLayout>
+    </ScrollView>
+
 
 </RelativeLayout>

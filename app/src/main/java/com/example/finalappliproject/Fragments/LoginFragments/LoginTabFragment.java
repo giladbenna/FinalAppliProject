@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.finalappliproject.MainActivity;
 import com.example.finalappliproject.R;
+import com.example.finalappliproject.Utilitis.DataManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -75,9 +76,10 @@ public class LoginTabFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressBar.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
+                                DataManager.getInstance().setRecepies();
                                 Toast.makeText(LoginTabFragment.this.getContext(), "Login Success.",Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getActivity(), MainActivity.class);
-                                startActivity(intent);
+                                //Intent intent = new Intent(getActivity(), MainActivity.class);
+                                //startActivity(intent);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());

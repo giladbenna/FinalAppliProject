@@ -1,10 +1,33 @@
 package com.example.finalappliproject.Utilitis;
 
+import android.util.Log;
+
 import com.example.finalappliproject.Models.Recipe;
+import com.example.finalappliproject.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 
 public class DataManager {
+
+    private static DataManager INSTANCE;
+    private FirebaseFirestore db;
+    public static DataManager getInstance() {
+        if(INSTANCE == null){
+            INSTANCE = new DataManager();
+        }
+        return INSTANCE;
+    }
+
+    private DataManager(){
+        this.db = FirebaseFirestore.getInstance();
+    }
 
     public static ArrayList<Recipe> getRecipes() {
         ArrayList<Recipe> recipes = new ArrayList<>();
@@ -28,6 +51,39 @@ public class DataManager {
         return recipes;
     }
 
+
+    public void setRecepies() {
+
+        db = FirebaseFirestore.getInstance();
+
+                    // Assume we have a reference to the parent document
+                    DocumentReference parentDocumentRef = db.collection(Constants.DBKeys.USERS).document("J2lbk3NKeOMSK6k6RkoT6nXZGC52");
+
+                    // Create a reference to the collection
+                    CollectionReference collectionRef = parentDocumentRef.collection(Constants.DBKeys.FAVORITES);
+
+                    // Set data to the collection
+                    Recipe recipe = getRecipes().get(1);
+                    // Create a new document in the collection and set data
+                    collectionRef.document(recipe.getId()+"").set(recipe)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    // Data set to the subcollection successfully
+                                    Log.d("TAG", "saved to document success : " + recipe);
+//                                    requireActivity().getSupportFragmentManager().beginTransaction()
+//                                            .replace(R.id.frame_layout, new WorksFormFragment())
+//                                            .commit();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    // Failed to set data to the subcollection
+                                    Log.e("TAG", "saved to document failed : " + recipe);
+                                }
+                            });
+            }
 
 }
 

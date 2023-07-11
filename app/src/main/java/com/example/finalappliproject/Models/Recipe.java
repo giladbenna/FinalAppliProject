@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 public class Recipe implements Parcelable {
 
+    private int id;
     private String title = "";
     private String image = "";
     private boolean isFavorite = false;
@@ -17,6 +18,10 @@ public class Recipe implements Parcelable {
 
     public String[] getKeyWordsArgs() {
         return KeyWordsArgs;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Recipe setKeyWordsArgs(String[] keyWordsArgs) {

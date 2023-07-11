@@ -99,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
         frameLayout = findViewById(R.id.frame_layout);
-        leftCheckboxesLayout = findViewById(R.id.leftCheckboxesLayout);
-        rightCheckboxesLayout = findViewById(R.id.rightCheckboxesLayout);
     }
     @Override
     public void onBackPressed() {

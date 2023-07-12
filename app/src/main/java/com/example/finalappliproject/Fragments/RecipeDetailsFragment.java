@@ -4,18 +4,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.finalappliproject.Models.Recipe;
 import com.example.finalappliproject.R;
+import com.example.finalappliproject.Utilitis.ImageLoader;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class RecipeDetailsFragment extends Fragment {
 
-    TextView userInfo;
+    TextView recipeDetails;
+    ShapeableImageView recipePicture;
     Recipe selectedRecipe;
 
     @Override
@@ -28,13 +32,16 @@ public class RecipeDetailsFragment extends Fragment {
             selectedRecipe = args.getParcelable("selectedRecipe");
         }
 
-        userInfo.setText(selectedRecipe.getRecipeFeatures());
+        recipeDetails.setText(selectedRecipe.getRecipeFeatures());
+        ImageLoader.getInstance().loadImage(selectedRecipe.getImage(), recipePicture);
+
 
         return root;
     }
 
     private void findViews(ViewGroup root) {
-        userInfo = root.findViewById(R.id.RecipeDetails);
+        recipeDetails = root.findViewById(R.id.RecipeDetails);
+        recipePicture = root.findViewById(R.id.RecipeImage);
     }
 
 }

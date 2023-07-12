@@ -1,7 +1,6 @@
 package com.example.finalappliproject.Fragments;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,18 +21,44 @@ import java.util.Objects;
 public class RecipeFragment extends Fragment {
     private RecyclerView main_LST_recipes;
 
+    String valueOfCategory;
+    RecipeListAdapter recipeListAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recipe_fragment, container, false);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            valueOfCategory = bundle.getString("selectedCategory");
+        }
 
         // Find and initialize your views here
         findViews(rootView);
         initViews();
+
+
         return rootView;
     }
 
     private void initViews() {
-        RecipeListAdapter recipeListAdapter = new RecipeListAdapter(getContext(), DataManager.getRecipes());
+        recipeListAdapter = new RecipeListAdapter(getContext(), DataManager.getAllRecipes());
+        switch (valueOfCategory) {
+            case "AllRecipes":
+                recipeListAdapter = new RecipeListAdapter(getContext(), DataManager.getAllRecipes());
+                break;
+            case "FridayDinner":
+                recipeListAdapter = new RecipeListAdapter(getContext(), DataManager.getFridayDinnerRecipes());
+                break;
+            case "BreakFast":
+                recipeListAdapter = new RecipeListAdapter(getContext(), DataManager.getBreakFastRecipes());
+                break;
+            case "Lunch":
+                recipeListAdapter = new RecipeListAdapter(getContext(), DataManager.getLunchRecipes());
+                break;
+            case "Dinner":
+                recipeListAdapter = new RecipeListAdapter(getContext(), DataManager.getDinnerRecipes());
+                break;
+        }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         main_LST_recipes.setLayoutManager(linearLayoutManager);
@@ -58,8 +83,7 @@ public class RecipeFragment extends Fragment {
                 args.putParcelable("selectedRecipe", recipe);
                 fragment.setArguments(args);
 
-                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragment).commit();
-
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragment).commit();
 
 
             }

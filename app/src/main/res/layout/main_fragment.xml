@@ -26,7 +26,7 @@
             android:fontFamily="@font/akaya_telivigala"
             android:gravity="center"
             android:text="@string/fresh_food"
-            android:textColor="#333333"
+            android:textColor="@color/black"
             android:textSize="32sp"
             android:textStyle="bold">
 
@@ -72,9 +72,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/RandomButton"
-        android:layout_above="@id/recipeButton"
+        android:layout_above="@id/allRecipesButton"
         android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:id="@+id/leftLayout"
@@ -82,24 +82,25 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginStart="10dp"
+            android:layout_margin="10dp"
             >
 
             <Button
                 android:id="@+id/FridayDinner"
-                android:layout_width="180dp"
-                android:layout_height="140dp"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
                 android:background="@null"
                 android:drawableStart="@drawable/friday_dinner"
-                android:scaleType="centerCrop"
                 android:layout_marginBottom="10dp"
                 />
 
             <Button
                 android:id="@+id/Dinner"
-                android:layout_width="180dp"
-                android:layout_height="140dp"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:background="@null"
                 android:drawableStart="@drawable/dinner_pic"
                 android:scaleType="centerCrop"
@@ -115,12 +116,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:layout_margin="10dp">
 
             <Button
                 android:id="@+id/BreakFast"
-                android:layout_width="180dp"
-                android:layout_height="140dp"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:background="@null"
                 android:drawableStart="@drawable/breakfast"
                 android:scaleType="centerCrop"
@@ -129,8 +131,9 @@
 
             <Button
                 android:id="@+id/Lunch"
-                android:layout_width="180dp"
-                android:layout_height="140dp"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:background="@null"
                 android:drawableStart="@drawable/lunch_pic"
                 android:scaleType="centerCrop"
@@ -146,14 +149,14 @@
 
 
     <Button
-        android:id="@+id/recipeButton"
+        android:id="@+id/allRecipesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/find_me_recipe"
+        android:text="@string/show_me_all_recipes"
         android:textSize="24sp"
         android:textStyle="bold"
         android:fontFamily="@font/akaya_telivigala"
-        android:backgroundTint="@color/light_blue"
+        android:backgroundTint="@color/blue"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"

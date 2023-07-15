@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,7 +24,7 @@
             android:layout_below="@id/logo_nav"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/akaya_telivigala"
+            android:fontFamily="@font/arvo"
             android:gravity="center"
             android:text="@string/fresh_food"
             android:textColor="@color/black"
@@ -36,33 +37,35 @@
     </RelativeLayout>
 
 
-
     <Button
         android:id="@+id/favoriteButton"
-        android:layout_width="195dp"
+        android:layout_width="190dp"
         android:layout_height="80dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="210dp"
+        android:background="@drawable/round_corners"
+        android:backgroundTint="@color/light_blue"
+        android:fontFamily="@font/arvo"
+        android:paddingTop="8dp"
         android:text="@string/favorites"
         android:textSize="28sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/akaya_telivigala"
-        android:backgroundTint="@color/light_blue"
-        android:layout_marginTop="210dp"
-        android:layout_marginStart="10dp"
-        android:paddingTop="22dp"/>
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/RandomButton"
-        android:layout_width="195dp"
+        android:layout_width="190dp"
         android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="210dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/round_corners"
+        android:backgroundTint="@color/light_blue"
+        android:fontFamily="@font/arvo"
+        android:paddingTop="8dp"
         android:text="Random"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:fontFamily="@font/akaya_telivigala"
-        android:backgroundTint="@color/light_blue"
-        android:layout_marginTop="210dp"
-        android:layout_marginEnd="10dp"
-        android:layout_alignParentEnd="true"
-        android:paddingTop="22dp"
+
         />
 
 
@@ -85,25 +88,26 @@
             android:layout_margin="10dp"
             >
 
-            <Button
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/FridayDinner"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:background="@null"
-                android:drawableStart="@drawable/friday_dinner"
+                android:background="@drawable/friday_dinner"
                 android:layout_marginBottom="10dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+
                 />
 
-            <Button
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/Dinner"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@null"
-                android:drawableStart="@drawable/dinner_pic"
+                android:background="@drawable/dinner_pic"
                 android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
 
                 />
 
@@ -118,35 +122,34 @@
             android:orientation="vertical"
             android:layout_margin="10dp">
 
-            <Button
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/BreakFast"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@null"
-                android:drawableStart="@drawable/breakfast"
+                android:background="@drawable/breakfast"
                 android:scaleType="centerCrop"
                 android:layout_marginBottom="10dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+
                 />
 
-            <Button
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/Lunch"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@null"
-                android:drawableStart="@drawable/lunch_pic"
+                android:background="@drawable/lunch_pic"
                 android:scaleType="centerCrop"
-                />
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
 
+                />
 
 
 
         </LinearLayout>
 
     </LinearLayout>
-
-
 
     <Button
         android:id="@+id/allRecipesButton"
@@ -155,12 +158,13 @@
         android:text="@string/show_me_all_recipes"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:fontFamily="@font/akaya_telivigala"
+        android:fontFamily="@font/arvo"
         android:backgroundTint="@color/blue"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
-        android:paddingTop = "20dp"
+        android:padding="20dp"
+
         />
 
 

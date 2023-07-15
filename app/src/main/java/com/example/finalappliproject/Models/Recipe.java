@@ -14,29 +14,12 @@ public class Recipe implements Parcelable {
     private String difficulty = "";
     private int preparation_time = 0;
     private String recipeFeatures = "";
-    private String[] KeyWordsArgs = {};
 
-    public String[] getKeyWordsArgs() {
-        return KeyWordsArgs;
-    }
 
     public int getId() {
         return id;
     }
 
-    public Recipe setKeyWordsArgs(String[] keyWordsArgs) {
-        KeyWordsArgs = keyWordsArgs;
-        return this;
-    }
-
-    public Recipe(String title, String image, String difficulty, int preparation_time, String recipeFeatures, String[] keyWordsArgs) {
-        this.title = title;
-        this.image = image;
-        this.difficulty = difficulty;
-        this.preparation_time = preparation_time;
-        this.recipeFeatures = recipeFeatures;
-        KeyWordsArgs = keyWordsArgs;
-    }
 
     public Recipe(String title, String image, String difficulty, int preparation_time, String recipeFeatures) {
         this.title = title;

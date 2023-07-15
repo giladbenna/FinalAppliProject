@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class RecipeDetailsFragment extends Fragment {
 
     TextView recipeDetails;
+    TextView recipeName;
     ShapeableImageView recipePicture;
     Recipe selectedRecipe;
 
@@ -27,12 +28,15 @@ public class RecipeDetailsFragment extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.recipe_details,container,false);
         findViews(root);
 
+
+
         Bundle args = getArguments();
         if (args != null) {
             selectedRecipe = args.getParcelable("selectedRecipe");
         }
 
         recipeDetails.setText(selectedRecipe.getRecipeFeatures());
+        recipeName.setText(selectedRecipe.getTitle());
         ImageLoader.getInstance().loadImage(selectedRecipe.getImage(), recipePicture);
 
 
@@ -42,6 +46,7 @@ public class RecipeDetailsFragment extends Fragment {
     private void findViews(ViewGroup root) {
         recipeDetails = root.findViewById(R.id.RecipeDetails);
         recipePicture = root.findViewById(R.id.RecipeImage);
+        recipeName = root.findViewById(R.id.RecipeName);
     }
 
 }

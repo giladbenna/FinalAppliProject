@@ -17,16 +17,17 @@ import com.example.finalappliproject.Fragments.RecipeDetailsFragment;
 import com.example.finalappliproject.Fragments.RecipeFragment;
 import com.example.finalappliproject.MainActivity;
 import com.example.finalappliproject.R;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.Objects;
 
 public class MainFragment extends Fragment {
 
     Button BtAllRecipes;
-    Button BtFridayDinner;
-    Button BtBreakFast;
-    Button BtDinner;
-    Button BtLunch;
+    ShapeableImageView BtFridayDinner;
+    ShapeableImageView BtBreakFast;
+    ShapeableImageView BtDinner;
+    ShapeableImageView BtLunch;
     Button BtFavorites;
     String Cat;
 

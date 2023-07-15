@@ -41,6 +41,7 @@ public class RecipeFragment extends Fragment {
     }
 
     private void initViews() {
+        DataManager.getInstance().setRecipes();
         recipeListAdapter = new RecipeListAdapter(getContext(), DataManager.getAllRecipes());
         switch (valueOfCategory) {
             case "AllRecipes":

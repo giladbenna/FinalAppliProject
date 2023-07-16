@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.finalappliproject.Interfaces.RecipeCallback;
 import com.example.finalappliproject.Models.Recipe;
 import com.example.finalappliproject.R;
+import com.example.finalappliproject.Utilitis.DataManager;
 import com.example.finalappliproject.Utilitis.ImageLoader;
 import com.example.finalappliproject.Utilitis.TimeFormat;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -50,10 +51,13 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.It
             holder.title.setText(recipe.getTitle());
             holder.preparation_time.setText(TimeFormat.getFormattedTime(recipe.getPreparation_time()));
             ImageLoader.getInstance().loadImage(recipe.getImage(), holder.recipe_IMG_poster);
-            if (recipe.isFavorite())
+            if (recipe.isFavorite()){
                 holder.recipe_IMG_favorite.setImageResource(R.drawable.heart);
-            else
+                DataManager.getInstance().addNewDocument(recipe);
+            }
+            else{
                 holder.recipe_IMG_favorite.setImageResource(R.drawable.heart_empty);
+            }
 
         }
         public interface OnClickListener{
@@ -97,10 +101,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.It
                     if (recipeCallback != null)
                         recipeCallback.itemClicked(getItem(getAdapterPosition()), getAdapterPosition());
                 });
+
                 recipe_IMG_favorite.setOnClickListener(v -> {
                     Log.d("hi", "ItemViewHolder: hello");
-                    if (recipeCallback != null)
+                    if (recipeCallback != null){
                         recipeCallback.favoriteClicked(getItem(getAdapterPosition()), getAdapterPosition());
+                    }
                 });
 
             }

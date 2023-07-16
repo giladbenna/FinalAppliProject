@@ -76,10 +76,10 @@ public class LoginTabFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressBar.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
-//                                DataManager.getInstance().setRecepies();
+                                DataManager.getInstance().setUser(mAuth.getCurrentUser());
                                 Toast.makeText(LoginTabFragment.this.getContext(), "Login Success.",Toast.LENGTH_SHORT).show();
-                                //Intent intent = new Intent(getActivity(), MainActivity.class);
-                                //startActivity(intent);
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                startActivity(intent);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());

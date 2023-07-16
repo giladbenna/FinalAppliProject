@@ -4,17 +4,24 @@ import static android.content.ContentValues.TAG;
 
 import android.util.Log;
 
+import com.example.finalappliproject.Interfaces.DataRetrievedListener;
 import com.example.finalappliproject.Models.Recipe;
 import com.example.finalappliproject.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +31,7 @@ public class DataManager {
 
     private static DataManager INSTANCE;
     private FirebaseFirestore db;
+    FirebaseUser user;
 
     public static DataManager getInstance() {
         if (INSTANCE == null) {
@@ -239,21 +247,21 @@ public class DataManager {
     public void setRecipes() {
         Map<String, Object> categoriesMap = new HashMap<>();
         categoriesMap.put("AllRecipes", getAllRecipesMap());
-        categoriesMap.put("FridayDinnerRecipes", getFridayDinnerRecipesMap());
+        categoriesMap.put("FridayDinner", getFridayDinnerRecipesMap());
         categoriesMap.put("BreakFast", getBreakFastRecipesMap());
         categoriesMap.put("Lunch", getLunchRecipesMap());
         categoriesMap.put("Dinner", getDinnerRecipesMap());
 
         // Assume we have a reference to the parent document
 //        DocumentReference parentDocumentRef = db.collection(Constants.DBKeys.RECIPES).document("AllRecipes");
-        String[] categories = {"AllRecipes", "FridayDinnerRecipes", "BreakFast", "Lunch", "Dinner"};
+        String[] categories = {"AllRecipes", "FridayDinner", "BreakFast", "Lunch", "Dinner"};
         for (String category : categories) {
 
             // Create a reference to the collection
-            CollectionReference collectionRef = db.collection(Constants.DBKeys.RECIPES);
-
+            CollectionReference collectionRef = db.collection(category);
+            Map<String, Object> tempMap = (Map<String, Object>) categoriesMap.get(category);
             // Create a new document in the collection and set data
-            collectionRef.document(category).set(Objects.requireNonNull(categoriesMap.get(category)))
+            collectionRef.document().set(tempMap.get("0"))
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -322,5 +330,274 @@ public class DataManager {
 //        return startIndex;
 //    }
 
+
+    public void uploadRecipesToDB() {
+        uploadFridayDinnerRecipesDB();
+        uploadBreakFastRecipesDB();
+        uploadLunchRecipesDB();
+        uploadDinnerRecipesDB();
+    }
+
+    public void uploadFridayDinnerRecipesDB() {
+        CollectionReference FridayDinner = db.collection("FridayDinner");
+        Map<String, Object> recipe_1 = new HashMap<>();
+        recipe_1.put("title", "Kuba Beetroot");
+        recipe_1.put("image", "https://i.ytimg.com/vi/1aRjBmrBpUg/maxresdefault.jpg");
+        recipe_1.put("isFavorite", false);
+        recipe_1.put("difficulty", "hard");
+        recipe_1.put("preparation_time", 150);
+        recipe_1.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        FridayDinner.document("Kuba Beetroot").set(recipe_1);
+
+        Map<String, Object> recipe_2 = new HashMap<>();
+        recipe_2.put("title", "Schnitzel");
+        recipe_2.put("image", "https://www.yehudit-aviv.co.il/wp-content/uploads/DSC_0050-%D7%A2%D7%A8%D7%95%D7%9A-7.jpg");
+        recipe_2.put("isFavorite", false);
+        recipe_2.put("difficulty", "medium");
+        recipe_2.put("preparation_time", 70);
+        recipe_2.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        FridayDinner.document("Schnitzel").set(recipe_2);
+
+        Map<String, Object> recipe_3 = new HashMap<>();
+        recipe_3.put("title", "Hrime");
+        recipe_3.put("image", "https://www.bishuli.co.il/wp-content/uploads/2021/01/moroccan-salmon01.jpg");
+        recipe_3.put("isFavorite", false);
+        recipe_3.put("difficulty", "medium");
+        recipe_3.put("preparation_time", 90);
+        recipe_3.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        FridayDinner.document("Hrime").set(recipe_3);
+
+        Map<String, Object> recipe_4 = new HashMap<>();
+        recipe_4.put("title", "Halat Shabat");
+        recipe_4.put("image", "https://yifaty.co.il/wp-content/uploads/2017/05/p-206.jpg");
+        recipe_4.put("isFavorite", false);
+        recipe_4.put("difficulty", "medium");
+        recipe_4.put("preparation_time", 90);
+        recipe_4.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        FridayDinner.document("Halat Shabat").set(recipe_4);
+    }
+
+    public void uploadBreakFastRecipesDB() {
+        CollectionReference breakFast = db.collection("BreakFast");
+        Map<String, Object> recipe_1 = new HashMap<>();
+        recipe_1.put("title", "Crumble Eggs");
+        recipe_1.put("image", "https://d3o5sihylz93ps.cloudfront.net/wp-content/uploads/2020/03/11102622/shutterstock_1210000312.jpg");
+        recipe_1.put("isFavorite", false);
+        recipe_1.put("difficulty", "easy");
+        recipe_1.put("preparation_time", 10);
+        recipe_1.put("recipeFeatures", "take eggs, put in the stove...");
+        breakFast.document("Crumble Eggs").set(recipe_1);
+
+        Map<String, Object> recipe_2 = new HashMap<>();
+        recipe_2.put("title", "Greek Salad");
+        recipe_2.put("image", "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/08/Greek-Salad-main.jpg");
+        recipe_2.put("isFavorite", false);
+        recipe_2.put("difficulty", "medium");
+        recipe_2.put("preparation_time", 25);
+        recipe_2.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        breakFast.document("Greek Salad").set(recipe_2);
+
+        Map<String, Object> recipe_3 = new HashMap<>();
+        recipe_3.put("title", "French Toast");
+        recipe_3.put("image", "https://www.allrecipes.com/thmb/VjVrkCVYaalH2JXogJMoFQ_a-zI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/7016-french-toast-mfs-010-0e1007bf0b47433abe91f2f0c74e5a27.jpg");
+        recipe_3.put("isFavorite", false);
+        recipe_3.put("difficulty", "medium");
+        recipe_3.put("preparation_time", 15);
+        recipe_3.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        breakFast.document("French Toast").set(recipe_3);
+    }
+
+    public void uploadLunchRecipesDB() {
+        CollectionReference lunch = db.collection("Lunch");
+        Map<String, Object> recipe_1 = new HashMap<>();
+        recipe_1.put("title", "Grilled Chicken");
+        recipe_1.put("image", "https://d3o5sihylz93ps.cloudfront.net/wp-content/uploads/2022/07/26140648/2-Medium-1024x733.jpg");
+        recipe_1.put("isFavorite", false);
+        recipe_1.put("difficulty", "medium");
+        recipe_1.put("preparation_time", 130);
+        recipe_1.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        lunch.document("Grilled Chicken").set(recipe_1);
+
+        Map<String, Object> recipe_2 = new HashMap<>();
+        recipe_2.put("title", "Meatball Spaghetti");
+        recipe_2.put("image", "https://www.onceuponachef.com/images/2019/09/Spaghetti-and-Meatballs.jpg");
+        recipe_2.put("isFavorite", false);
+        recipe_2.put("difficulty", "medium");
+        recipe_2.put("preparation_time", 70);
+        recipe_2.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        lunch.document("Meatball Spaghetti").set(recipe_2);
+
+        Map<String, Object> recipe_3 = new HashMap<>();
+        recipe_3.put("title", "Hrime");
+        recipe_3.put("image", "https://www.bishuli.co.il/wp-content/uploads/2021/01/moroccan-salmon01.jpg");
+        recipe_3.put("isFavorite", false);
+        recipe_3.put("difficulty", "medium");
+        recipe_3.put("preparation_time", 90);
+        recipe_3.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        lunch.document("Hrime").set(recipe_3);
+
+        Map<String, Object> recipe_4 = new HashMap<>();
+        recipe_4.put("title", "Halat Shabat");
+        recipe_4.put("image", "https://yifaty.co.il/wp-content/uploads/2017/05/p-206.jpg");
+        recipe_4.put("isFavorite", false);
+        recipe_4.put("difficulty", "medium");
+        recipe_4.put("preparation_time", 90);
+        recipe_4.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        lunch.document("Halat Shabat").set(recipe_4);
+    }
+
+    public void uploadDinnerRecipesDB() {
+        CollectionReference dinner = db.collection("Dinner");
+        Map<String, Object> recipe_1 = new HashMap<>();
+        recipe_1.put("title", "Fish Grill");
+        recipe_1.put("image", "https://images.indianexpress.com/2018/07/fish-sustainanbel-759.jpg");
+        recipe_1.put("isFavorite", false);
+        recipe_1.put("difficulty", "hard");
+        recipe_1.put("preparation_time", 150);
+        recipe_1.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        dinner.document("Fish Grill").set(recipe_1);
+
+        Map<String, Object> recipe_2 = new HashMap<>();
+        recipe_2.put("title", "Spaghetti Tomato");
+        recipe_2.put("image", "https://hips.hearstapps.com/hmg-prod/images/one-pot-spaghetti-6408ea3a9a32c.jpg?crop=1.00xw:0.335xh;0,0.262xh&resize=1200:*");
+        recipe_2.put("isFavorite", false);
+        recipe_2.put("difficulty", "medium");
+        recipe_2.put("preparation_time", 70);
+        recipe_2.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        dinner.document("Spaghetti Tomato").set(recipe_2);
+
+        Map<String, Object> recipe_3 = new HashMap<>();
+        recipe_3.put("title", "Pizza Peperoni");
+        recipe_3.put("image", "https://foodhub.scene7.com/is/image/woolworthsltdprod/2004-easy-pepperoni-pizza:Mobile-1300x1150");
+        recipe_3.put("isFavorite", false);
+        recipe_3.put("difficulty", "medium");
+        recipe_3.put("preparation_time", 60);
+        recipe_3.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        dinner.document("Pizza Peperoni").set(recipe_3);
+
+        Map<String, Object> recipe_4 = new HashMap<>();
+        recipe_4.put("title", "Beef With Veg");
+        recipe_4.put("image", "https://myfoodbook.com.au/sites/default/files/collections_image/slow_cooker_beef_chutney_stew_overhead_lands_0.jpg");
+        recipe_4.put("isFavorite", false);
+        recipe_4.put("difficulty", "medium");
+        recipe_4.put("preparation_time", 120);
+        recipe_4.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
+        dinner.document("Beef With Veg").set(recipe_4);
+
+    }
+
+    public void updateRecipe(String category, Recipe recipe) {
+        CollectionReference collectionRef = db.collection(category);
+        if (recipe != null) {
+            String documentId = recipe.getTitle();
+            Log.d(TAG, "updateRecipe: " + recipe);
+            collectionRef.document(documentId).set(recipe)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Update successful
+                            Log.d("TAG", "updateWorkOrder onSuccess: ");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Update failed
+                            Log.d("TAG", "updateWorkOrder onFailure: ");
+                        }
+                    });
+        }
+    }
+
+
+    public void readFromDB(String category, DataRetrievedListener listener) {
+
+        CollectionReference collectionRef = db.collection(category);
+
+        collectionRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot querySnapshot) {
+                ArrayList<Recipe> recipeList = new ArrayList<>();
+
+                for (QueryDocumentSnapshot documentSnapshot : querySnapshot) {
+                    Recipe recipe = documentSnapshot.toObject(Recipe.class);
+                    recipeList.add(recipe);
+                }
+                listener.onDataRetrieved(recipeList);
+
+                // Do something with the recipes ArrayList here
+                // For example, you can pass it to another method or update your UI
+            }
+        });
+
+    }
+
+    public void readFromDBUserFavorites(DataRetrievedListener listener) {
+        ArrayList<Recipe> recipeList = new ArrayList<>();
+
+        DocumentReference userDocumentRef = db.collection(Constants.DBKeys.USERS).document(user.getUid());
+        CollectionReference collectionRef = userDocumentRef.collection("favorites");
+        collectionRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    Recipe recipe = documentSnapshot.toObject(Recipe.class);
+                    recipeList.add(recipe);
+                }
+                listener.onDataRetrieved(recipeList);
+            }
+        });
+
+    }
+
+    public void setUser(FirebaseUser currentUser) {
+        this.user = currentUser;
+    }
+
+    public String addNewDocument(Recipe recipe) {
+        DocumentReference userDocumentRef = db.collection(Constants.DBKeys.USERS).document(user.getUid());
+        CollectionReference collectionRef = userDocumentRef.collection("favorites");
+        DocumentReference newDocumentRef = collectionRef.document();
+        String documentId = newDocumentRef.getId(); // Get the auto-generated document ID
+//        recipe.setFavorite(true);
+        newDocumentRef.set(recipe)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+        return documentId;
+    }
+
+    public void deleteDocuments(Recipe recipe) {
+        DocumentReference userDocumentRef = db.collection(Constants.DBKeys.USERS).document(user.getUid());
+        CollectionReference collectionRef = userDocumentRef.collection("favorites");
+        Query query = collectionRef.whereEqualTo("title", recipe.getTitle());
+        query.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot querySnapshot) {
+                        // Iterate through the documents returned by the query
+                        for (DocumentSnapshot documentSnapshot : querySnapshot.getDocuments()) {
+                            // Delete each document
+                            documentSnapshot.getReference().delete();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle the error
+                    }
+                });
+    }
 }
 

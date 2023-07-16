@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 
 public class Recipe implements Parcelable {
 
-    private int id;
     private String title = "";
     private String image = "";
     private boolean isFavorite = false;
@@ -15,10 +14,15 @@ public class Recipe implements Parcelable {
     private int preparation_time = 0;
     private String recipeFeatures = "";
 
-
-    public int getId() {
-        return id;
+    public Recipe(String title, String image, Boolean isFavorite, String difficulty, Integer preparation_time, String recipeFeatures) {
+        this.title = title;
+        this.image = image;
+        this.isFavorite = isFavorite;
+        this.difficulty = difficulty;
+        this.preparation_time = preparation_time;
+        this.recipeFeatures = recipeFeatures;
     }
+
 
 
     public Recipe(String title, String image, String difficulty, int preparation_time, String recipeFeatures) {
@@ -27,6 +31,10 @@ public class Recipe implements Parcelable {
         this.difficulty = difficulty;
         this.preparation_time = preparation_time;
         this.recipeFeatures = recipeFeatures;
+    }
+
+    public Recipe() {
+
     }
 
 
@@ -68,8 +76,8 @@ public class Recipe implements Parcelable {
         return isFavorite;
     }
 
-    public Recipe setFavorite(boolean favorite) {
-        isFavorite = favorite;
+    public Recipe setFavorite(boolean isFavorite) {
+        this.isFavorite = isFavorite;
         return this;
     }
 

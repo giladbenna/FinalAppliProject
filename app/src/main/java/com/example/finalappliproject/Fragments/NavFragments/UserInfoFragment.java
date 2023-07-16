@@ -37,6 +37,7 @@ public class UserInfoFragment extends Fragment {
         userInfo.setText(user.getEmail());
 
 
+
         return root;
     }
 

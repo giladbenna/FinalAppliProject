@@ -53,11 +53,9 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.It
             ImageLoader.getInstance().loadImage(recipe.getImage(), holder.recipe_IMG_poster);
             if (recipe.isFavorite()){
                 holder.recipe_IMG_favorite.setImageResource(R.drawable.heart);
-//                DataManager.getInstance().addNewDocument(recipe);
             }
             else{
                 holder.recipe_IMG_favorite.setImageResource(R.drawable.heart_empty);
-//                DataManager.getInstance().deleteDocuments(recipe);
             }
 
         }

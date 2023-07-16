@@ -5,11 +5,26 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.HomeFragment">
 
+    <TextView
+        android:id="@+id/textFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/arvo"
+        android:padding="15dp"
+        android:text="@string/favorites"
+        >
+    </TextView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_LST_recipes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+        android:layout_below="@id/textFavorites"
         tools:listitem="@layout/recipe_item" />
 
 </RelativeLayout>

@@ -53,10 +53,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.It
             ImageLoader.getInstance().loadImage(recipe.getImage(), holder.recipe_IMG_poster);
             if (recipe.isFavorite()){
                 holder.recipe_IMG_favorite.setImageResource(R.drawable.heart);
-                DataManager.getInstance().addNewDocument(recipe);
+//                DataManager.getInstance().addNewDocument(recipe);
             }
             else{
                 holder.recipe_IMG_favorite.setImageResource(R.drawable.heart_empty);
+//                DataManager.getInstance().deleteDocuments(recipe);
             }
 
         }
@@ -105,7 +106,14 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.It
                 recipe_IMG_favorite.setOnClickListener(v -> {
                     Log.d("hi", "ItemViewHolder: hello");
                     if (recipeCallback != null){
+                        Recipe recipe = getItem(getAdapterPosition());
                         recipeCallback.favoriteClicked(getItem(getAdapterPosition()), getAdapterPosition());
+                        if(recipe.isFavorite()){
+                            DataManager.getInstance().addNewDocument(recipe);
+                        }
+                        else {
+                            DataManager.getInstance().deleteDocuments(recipe);
+                        }
                     }
                 });
 

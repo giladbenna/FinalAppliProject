@@ -428,22 +428,22 @@ public class DataManager {
         lunch.document("Meatball Spaghetti").set(recipe_2);
 
         Map<String, Object> recipe_3 = new HashMap<>();
-        recipe_3.put("title", "Hrime");
-        recipe_3.put("image", "https://www.bishuli.co.il/wp-content/uploads/2021/01/moroccan-salmon01.jpg");
+        recipe_3.put("title", "Macluba Borgol");
+        recipe_3.put("image", "https://d3o5sihylz93ps.cloudfront.net/wp-content/uploads/2023/07/02144450/%D7%94%D7%A0%D7%9E%D7%9C-%D7%99%D7%95%D7%A0%D7%993054-Medium.jpg");
         recipe_3.put("isFavorite", false);
         recipe_3.put("difficulty", "medium");
         recipe_3.put("preparation_time", 90);
         recipe_3.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
-        lunch.document("Hrime").set(recipe_3);
+        lunch.document("Macluba Borgol").set(recipe_3);
 
         Map<String, Object> recipe_4 = new HashMap<>();
-        recipe_4.put("title", "Halat Shabat");
-        recipe_4.put("image", "https://yifaty.co.il/wp-content/uploads/2017/05/p-206.jpg");
+        recipe_4.put("title", "Grilled Salamon");
+        recipe_4.put("image", "https://cdn.babamail.co.il/images/recipes_source/8a305fcb-3a68-4bff-961b-0f2b955da17a.jpg");
         recipe_4.put("isFavorite", false);
         recipe_4.put("difficulty", "medium");
         recipe_4.put("preparation_time", 90);
         recipe_4.put("recipeFeatures", "put pasta in the bucket, then wash some onions...");
-        lunch.document("Halat Shabat").set(recipe_4);
+        lunch.document("Grilled Salamon").set(recipe_4);
     }
 
     public void uploadDinnerRecipesDB() {

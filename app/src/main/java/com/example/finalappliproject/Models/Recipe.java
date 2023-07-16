@@ -3,21 +3,19 @@ package com.example.finalappliproject.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
 public class Recipe implements Parcelable {
 
     private String title = "";
     private String image = "";
-    private boolean isFavorite = false;
+    private boolean favorite = false;
     private String difficulty = "";
     private int preparation_time = 0;
     private String recipeFeatures = "";
 
-    public Recipe(String title, String image, Boolean isFavorite, String difficulty, Integer preparation_time, String recipeFeatures) {
+    public Recipe(String title, String image, Boolean favorite, String difficulty, Integer preparation_time, String recipeFeatures) {
         this.title = title;
         this.image = image;
-        this.isFavorite = isFavorite;
+        this.favorite = favorite;
         this.difficulty = difficulty;
         this.preparation_time = preparation_time;
         this.recipeFeatures = recipeFeatures;
@@ -73,11 +71,11 @@ public class Recipe implements Parcelable {
     }
 
     public boolean isFavorite() {
-        return isFavorite;
+        return favorite;
     }
 
     public Recipe setFavorite(boolean isFavorite) {
-        this.isFavorite = isFavorite;
+        this.favorite = isFavorite;
         return this;
     }
 
@@ -104,7 +102,7 @@ public class Recipe implements Parcelable {
         return "Recipe{" +
                 "title='" + title + '\'' +
                 ", image='" + image + '\'' +
-                ", isFavorite=" + isFavorite +
+                ", isFavorite=" + favorite +
                 ", difficulty='" + difficulty + '\'' +
                 ", preparation_time=" + preparation_time +
                 '}';
@@ -126,7 +124,7 @@ public class Recipe implements Parcelable {
     protected Recipe(Parcel in) {
         title = in.readString();
         image = in.readString();
-        isFavorite = in.readByte() != 0;  // Read a byte and convert it to a boolean
+        favorite = in.readByte() != 0;  // Read a byte and convert it to a boolean
         difficulty = in.readString();
         preparation_time = in.readInt();
         recipeFeatures = in.readString();
@@ -142,7 +140,7 @@ public class Recipe implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(image);
-        dest.writeByte((byte) (isFavorite ? 1 : 0));  // Write a byte representing the boolean value
+        dest.writeByte((byte) (favorite ? 1 : 0));  // Write a byte representing the boolean value
         dest.writeString(difficulty);
         dest.writeInt(preparation_time);
         dest.writeString(recipeFeatures);
